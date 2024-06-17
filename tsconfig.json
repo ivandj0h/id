@@ -1,18 +1,19 @@
 {
   "compilerOptions": {
-    "target": "ES6",
-    "module": "commonjs",
+    "target": "ESNext",
+    "module": "CommonJS",
     "strict": true,
-    "jsx": "react",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",
-    "baseUrl": ".",
+    "rootDir": "./",
+    "baseUrl": "./",
     "paths": {
       "project-id-core": ["packages/core/src"],
       "project-id-cli": ["packages/cli/src"]
     }
   },
-  "include": ["packages/**/*", "examples/**/*"]
+  "include": ["packages/**/*", "examples/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

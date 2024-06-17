@@ -1,36 +1,25 @@
-import { VNode } from './vdom';
-import {createDomElement} from "./render";
+// component.ts
+import { createElement, createDomElement, VNode } from './vdom';
 
-export interface ComponentProps {
-    [key: string]: any;
-}
+export class Component<P, S> {
+    props: P;
+    state: S;
+    dom: HTMLElement | null = null;
 
-export class Component<P = ComponentProps> {
-    public props: P;
-    public state: any = {};
-    public dom: HTMLElement | null = null;
-
-    constructor(props: P) {
+    constructor(props: P, initialState: S) {
         this.props = props;
+        this.state = initialState;
+    }
+
+    setState(newState: Partial<S>) {
+        this.state = { ...this.state, ...newState };
+        const newVNode = this.render();
+        const newDom = createDomElement(newVNode) as HTMLElement;
+        this.dom!.replaceWith(newDom);
+        this.dom = newDom;
     }
 
     render(): VNode {
-        throw new Error('Render method should be implemented by subclass');
-    }
-
-    setState(newState: any) {
-        this.state = { ...this.state, ...newState };
-        this.update();
-    }
-
-    update() {
-        if (this.dom) {
-            const newVNode = this.render();
-            const newDom = createDomElement(newVNode);
-            if (this.dom.parentNode) {
-                this.dom.parentNode.replaceChild(newDom, this.dom);
-            }
-            this.dom = newDom as HTMLElement;
-        }
+        throw new Error('Component subclass must implement render method');
     }
 }

@@ -10,7 +10,7 @@ class App extends Component<AppProps> {
     }
 }
 
-const element = createElement(App, { name: 'World' });
+const element = createElement(App, { name: 'ivandjoh' });
 
 const rootElement = document.getElementById('root');
 if (rootElement) {

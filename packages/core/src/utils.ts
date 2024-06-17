@@ -1,3 +1,13 @@
-export function isFunction(value: any): boolean {
-    return typeof value === 'function';
+export function createElement(tag: string | Function, props: { [key: string]: any }, ...children: any[]): VNode {
+    return {
+        tag,
+        props: props || {},
+        children
+    };
+}
+
+export interface VNode {
+    tag: string | Function;
+    props: { [key: string]: any };
+    children: any[];
 }
