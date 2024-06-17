@@ -1,25 +1,23 @@
 {
-  "name": "id",
+  "name": "project-id",
   "version": "1.0.0",
-  "description": "a flexible frontend framework",
-  "main": "index.ts",
-  "scripts": {
-    "build": "turbo run build",
-    "start": "turbo run start",
-    "test": "turbo run test"
-  },
-  "packageManager": "npm@7.0.0",
-  "keywords": [
-    "javascript",
-    "framework",
-    "js",
-    "framework"
+  "main": "index.js",
+  "license": "MIT",
+  "workspaces": [
+    "packages/core",
+    "packages/cli",
+    "examples/simple-app"
   ],
-  "author": "ivandjoh",
-  "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.14.2",
+    "cross-env": "^7.0.0",
     "turbo": "^2.0.4",
     "typescript": "^5.4.5"
-  }
+  },
+  "scripts": {
+    "build": "cross-env NODE_ENV=production turbo run build",
+    "start": "cross-env NODE_ENV=production turbo run start",
+    "test": "cross-env NODE_ENV=production turbo run test"
+  },
+  "packageManager": "npm@7.0.0"
 }

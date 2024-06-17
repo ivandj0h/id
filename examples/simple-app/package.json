@@ -1,0 +1,18 @@
+{
+  "name": "simple-app",
+  "version": "1.0.0",
+  "main": "src/index.tsx",
+  "scripts": {
+    "build": "tsc -p .",
+    "start": "parcel index.html"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "@types/node": "^20.14.2",
+    "parcel-bundler": "^1.12.5"
+  },
+  "dependencies": {
+    "project-id-core": "file:../../packages/core",
+    "project-id-cli": "file:../../packages/cli"
+  }
+}

@@ -3,9 +3,16 @@
     "target": "ES6",
     "module": "commonjs",
     "strict": true,
+    "jsx": "react",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "paths": {
+      "project-id-core": ["packages/core/src"],
+      "project-id-cli": ["packages/cli/src"]
+    }
   },
-  "include": ["packages/**/*.ts", "examples/**/*.ts"]
+  "include": ["packages/**/*", "examples/**/*"]
 }
