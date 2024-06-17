@@ -1,0 +1,25 @@
+{
+  "name": "id",
+  "version": "1.0.0",
+  "description": "a flexible frontend framework",
+  "main": "index.ts",
+  "scripts": {
+    "build": "turbo run build",
+    "start": "turbo run start",
+    "test": "turbo run test"
+  },
+  "packageManager": "npm@7.0.0",
+  "keywords": [
+    "javascript",
+    "framework",
+    "js",
+    "framework"
+  ],
+  "author": "ivandjoh",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.14.2",
+    "turbo": "^2.0.4",
+    "typescript": "^5.4.5"
+  }
+}
