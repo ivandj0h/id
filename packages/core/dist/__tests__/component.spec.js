@@ -15,30 +15,24 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-// component.spec.ts
 var vdom_1 = require("../vdom");
 var component_1 = require("../component");
 var TestComponent = /** @class */ (function (_super) {
     __extends(TestComponent, _super);
     function TestComponent(props) {
-        return _super.call(this, props, { count: 0 }) || this;
+        return _super.call(this, props, {}) || this;
     }
     TestComponent.prototype.render = function () {
-        return (0, vdom_1.createElement)('div', {}, "".concat(this.props.message, " ").concat(this.state.count));
+        return (0, vdom_1.createElement)('div', {}, this.props.message); // Ubah 'null' menjadi '{}'
     };
     return TestComponent;
 }(component_1.Component));
-function createTestComponent(props) {
-    var component = new TestComponent(props);
-    var vnode = component.render();
-    component.dom = (0, vdom_1.createDomElement)(vnode);
-    return vnode;
-}
 describe('Component', function () {
     it('should render a component with initial props', function () {
-        var componentVNode = (0, vdom_1.createElement)(createTestComponent, { message: 'Click me' });
+        var componentVNode = (0, vdom_1.createElement)(TestComponent, { message: 'Click me' }); // Pastikan props adalah objek valid
         var domElement = (0, vdom_1.createDomElement)(componentVNode);
         document.body.appendChild(domElement);
-        expect(domElement.textContent).toBe('Click me 0');
+        expect(domElement.textContent).toBe('Click me');
     });
+    // Tambahkan pengujian lainnya di sini jika diperlukan
 });

@@ -1,20 +1,23 @@
-import { createElement, render, Component } from 'project-id-core/src';
+import { createElement, createDomElement, Component, VNode } from 'project-id-core/src';
 
-interface AppProps {
-    name: string;
-}
+type AppProps = {
+    message: string;
+};
 
-class App extends Component<AppProps> {
-    render() {
-        return createElement('div', {}, `Hello, ${this.props.name}!`);
+class App extends Component<AppProps, {}> {
+    constructor(props: AppProps) {
+        super(props, {});
+    }
+
+    render(): VNode {
+        return createElement('div', {}, this.props.message);
     }
 }
 
-const element = createElement(App, { name: 'ivandjoh' });
-
-const rootElement = document.getElementById('root');
-if (rootElement) {
-    render(element, rootElement);
+const appVNode = createElement(App, { message: 'Hello World' });
+const container = document.getElementById('root');
+if (container) {
+    container.appendChild(createDomElement(appVNode));
 } else {
     console.error('Root element not found');
 }
