@@ -1,10 +1,10 @@
-import { VNode } from './vdom';
-import { Component } from './component';
-
-export function createDomElement(vnode: VNode): HTMLElement | Text {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.render = exports.createDomElement = void 0;
+function createDomElement(vnode) {
     if (typeof vnode.tag === 'function') {
         // Memastikan bahwa vnode.tag adalah komponen berbasis kelas yang konkret
-        const componentClass = vnode.tag as { new (props: any): Component<any> };
+        const componentClass = vnode.tag;
         const instance = new componentClass(vnode.props);
         const childVNode = instance.render();
         const domElement = createDomElement(childVNode);
@@ -14,24 +14,21 @@ export function createDomElement(vnode: VNode): HTMLElement | Text {
         }
         return domElement;
     }
-
     // Jika vnode.tag adalah string (nama tag HTML)
-    const element = document.createElement(vnode.tag as string);
-
+    const element = document.createElement(vnode.tag);
     Object.keys(vnode.props).forEach(key => {
         element.setAttribute(key, vnode.props[key]);
     });
-
     vnode.children.forEach(child => {
         const childElement = typeof child === 'string'
             ? document.createTextNode(child)
             : createDomElement(child);
         element.appendChild(childElement);
     });
-
     return element;
 }
-
-export function render(vnode: VNode, container: HTMLElement) {
+exports.createDomElement = createDomElement;
+function render(vnode, container) {
     container.appendChild(createDomElement(vnode));
 }
+exports.render = render;

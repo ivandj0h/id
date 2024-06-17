@@ -1,0 +1,13 @@
+{
+  "tasks": {
+    "build": {
+      "outputs": ["packages/core/dist/**", "packages/cli/dist/**"]
+    },
+    "lint": {
+      "outputs": []
+    },
+    "test": {
+      "outputs": []
+    }
+  }
+}
