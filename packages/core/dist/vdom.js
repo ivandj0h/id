@@ -2,12 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createDomElement = exports.createElement = void 0;
 function createElement(tag, props) {
+    if (props === void 0) { props = {}; }
     var children = [];
     for (var _i = 2; _i < arguments.length; _i++) {
         children[_i - 2] = arguments[_i];
     }
     if (typeof tag === 'function') {
-        return tag(props);
+        var componentInstance = new tag(props);
+        return componentInstance.render();
     }
     return { tag: tag, props: props, children: children };
 }
@@ -17,7 +19,8 @@ function createDomElement(vnode) {
         return document.createTextNode(vnode);
     }
     if (typeof vnode.tag === 'function') {
-        var componentVNode = vnode.tag(vnode.props);
+        var componentInstance = new vnode.tag(vnode.props);
+        var componentVNode = componentInstance.render();
         return createDomElement(componentVNode);
     }
     var element = document.createElement(vnode.tag);

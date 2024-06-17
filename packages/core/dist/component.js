@@ -12,19 +12,20 @@ var __assign = (this && this.__assign) || function () {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Component = void 0;
-// component.ts
 var vdom_1 = require("./vdom");
 var Component = /** @class */ (function () {
     function Component(props, initialState) {
-        this.dom = null;
         this.props = props;
         this.state = initialState;
+        this.dom = null;
     }
     Component.prototype.setState = function (newState) {
         this.state = __assign(__assign({}, this.state), newState);
         var newVNode = this.render();
         var newDom = (0, vdom_1.createDomElement)(newVNode);
-        this.dom.replaceWith(newDom);
+        if (this.dom) {
+            this.dom.replaceWith(newDom);
+        }
         this.dom = newDom;
     };
     Component.prototype.render = function () {

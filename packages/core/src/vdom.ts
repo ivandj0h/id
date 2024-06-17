@@ -1,13 +1,19 @@
-// vdom.ts
 export type VNode = {
     tag: string | Function;
     props: { [key: string]: any };
     children: (VNode | string)[];
 };
 
-export function createElement(tag: string | Function, props: { [key: string]: any }, ...children: (VNode | string)[]): VNode {
+type ComponentClass<P> = {
+    new (props: P): {
+        render(): VNode;
+    };
+};
+
+export function createElement<P extends { [key: string]: any }>(tag: string | ComponentClass<P>, props: P = {} as P, ...children: (VNode | string)[]): VNode {
     if (typeof tag === 'function') {
-        return tag(props);
+        const componentInstance = new (tag as ComponentClass<P>)(props);
+        return componentInstance.render();
     }
     return { tag, props, children };
 }
@@ -17,7 +23,8 @@ export function createDomElement(vnode: VNode | string): HTMLElement | Text {
         return document.createTextNode(vnode);
     }
     if (typeof vnode.tag === 'function') {
-        const componentVNode = vnode.tag(vnode.props);
+        const componentInstance = new (vnode.tag as ComponentClass<any>)(vnode.props);
+        const componentVNode = componentInstance.render();
         return createDomElement(componentVNode);
     }
     const element = document.createElement(vnode.tag);

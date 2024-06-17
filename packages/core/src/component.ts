@@ -1,21 +1,23 @@
-// component.ts
 import { createElement, createDomElement, VNode } from './vdom';
 
 export class Component<P, S> {
     props: P;
     state: S;
-    dom: HTMLElement | null = null;
+    dom: HTMLElement | null;
 
     constructor(props: P, initialState: S) {
         this.props = props;
         this.state = initialState;
+        this.dom = null;
     }
 
     setState(newState: Partial<S>) {
         this.state = { ...this.state, ...newState };
         const newVNode = this.render();
         const newDom = createDomElement(newVNode) as HTMLElement;
-        this.dom!.replaceWith(newDom);
+        if (this.dom) {
+            this.dom.replaceWith(newDom);
+        }
         this.dom = newDom;
     }
 
