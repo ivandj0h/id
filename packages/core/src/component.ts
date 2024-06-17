@@ -1,11 +1,11 @@
-import { VNode, createElement } from './vdom';
-import { createDomElement } from './render';
+import { VNode } from './vdom';
+import {createDomElement} from "./render";
 
 export interface ComponentProps {
     [key: string]: any;
 }
 
-export abstract class Component<P = ComponentProps> {
+export class Component<P = ComponentProps> {
     public props: P;
     public state: any = {};
     public dom: HTMLElement | null = null;
@@ -14,7 +14,9 @@ export abstract class Component<P = ComponentProps> {
         this.props = props;
     }
 
-    abstract render(): VNode;
+    render(): VNode {
+        throw new Error('Render method should be implemented by subclass');
+    }
 
     setState(newState: any) {
         this.state = { ...this.state, ...newState };
