@@ -14,7 +14,10 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.createDomElement = exports.createElement = void 0;
 __exportStar(require("./component"), exports);
-__exportStar(require("./vdom"), exports);
 __exportStar(require("./render"), exports);
+var vdom_1 = require("./vdom");
+Object.defineProperty(exports, "createElement", { enumerable: true, get: function () { return vdom_1.createElement; } });
+Object.defineProperty(exports, "createDomElement", { enumerable: true, get: function () { return vdom_1.createDomElement; } });
 __exportStar(require("./utils"), exports);
